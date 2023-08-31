@@ -41,12 +41,17 @@ const main = async () => {
     for (let i = 0; i < finishSections.length; i++) {
         const section = finishSections[i];
         const sectionInfo = await getSection(section.id);
-        const sectionPath = `${bookName}/${
-            section.index
-        }.${sectionInfo.title.replaceAll("/", "\\")}.md`;
+
+        // 替换章节标题中的特殊字符
+        const safeTitle = sectionInfo.title.replaceAll("/", "-").replaceAll("：", "-");
+
+        // 使用安全的标题来创建文件路径
+        const sectionPath = `${bookName}/${section.index}.${safeTitle}.md`;
+
         fs.writeFileSync(sectionPath, sectionInfo.content);
         console.log(`第 ${section.index} 章下载完成`);
     }
+
 
     console.log(`小册 ${bookName} 下载完成`);
 };

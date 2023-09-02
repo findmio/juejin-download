@@ -2,7 +2,7 @@ import fs from "fs";
 import inquirer from "inquirer";
 import fse from "fs-extra";
 
-import { getBooks, getBookInfo, getSection, escapeFileName } from "./utils.js";
+import { getBooks, getBookInfo, getSection, replaceFileName } from "./utils.js";
 
 const main = async () => {
     const books = await getBooks();
@@ -42,7 +42,7 @@ const main = async () => {
         const section = finishSections[i];
         const sectionInfo = await getSection(section.id);
 
-        const sectionName = escapeFileName(sectionInfo.title);
+        const sectionName = replaceFileName(sectionInfo.title);
 
         const sectionPath = `${bookName}/${section.index}.${sectionName}.md`;
 

@@ -5,7 +5,7 @@ const cookies = fse.readJSONSync("./cookies.json");
 
 const cookie = cookies.reduce(
     (prev, curr) => prev + `${curr.name}=${curr.value};`,
-    ""
+    "",
 );
 
 export const getBooks = async () => {
@@ -60,4 +60,25 @@ export const getSection = async (sectionId) => {
         title: response.data.section.title,
         content: response.data.section.markdown_show,
     };
+};
+
+/** 使用 Unicode 字符替换文件名中的特殊字符 */
+export const replaceFileName = (fileName) => {
+    // https://docs.microsoft.com/zh-cn/windows/desktop/FileIO/naming-a-file#naming_conventions
+    const replaceMap = new Map([
+        ["<", "\uFE64"],
+        [">", "\uFE65"],
+        [":", "\uA789"],
+        ["/", "\u2215"],
+        ["\\", "\uFE68"],
+        ["|", "\u2758"],
+        ["?", "\uFE16"],
+        ["*", "\uFE61"],
+    ]);
+
+    const pattern = [...replaceMap.keys()].map((key) => "\\" + key).join("|");
+
+    const regex = new RegExp(pattern, "g");
+
+    return fileName.replace(regex, (match) => replaceMap.get(match));
 };

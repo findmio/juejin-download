@@ -2,7 +2,7 @@ import fs from "fs";
 import inquirer from "inquirer";
 import fse from "fs-extra";
 
-import { getBooks, getBookInfo, getSection } from "./utils.js";
+import { getBooks, getBookInfo, getSection, escapeFileName } from "./utils.js";
 
 const main = async () => {
     const books = await getBooks();
@@ -31,20 +31,23 @@ const main = async () => {
             }
             return prev;
         },
-        [[], []]
+        [[], []],
     );
 
     console.log(
-        `获取目录成功：完结 ${finishSections.length}章，写作中 ${progressSections.length}章`
+        `获取目录成功：完结 ${finishSections.length}章，写作中 ${progressSections.length}章`,
     );
 
     for (let i = 0; i < finishSections.length; i++) {
         const section = finishSections[i];
         const sectionInfo = await getSection(section.id);
-        const sectionPath = `${bookName}/${
-            section.index
-        }.${sectionInfo.title.replaceAll("/", "\\")}.md`;
+
+        const sectionName = escapeFileName(sectionInfo.title);
+
+        const sectionPath = `${bookName}/${section.index}.${sectionName}.md`;
+
         fs.writeFileSync(sectionPath, sectionInfo.content);
+
         console.log(`第 ${section.index} 章下载完成`);
     }
 

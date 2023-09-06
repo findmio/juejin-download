@@ -24,6 +24,9 @@ npm install
 node main.js
 ```
 
+## 预览
+<img width="960" src="./video.gif" alt="video">
+
 ## 声明
 
 本项目只做个人学习研究之用，不得用于商业用途！

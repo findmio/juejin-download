@@ -12,11 +12,11 @@ npm install
 
 ### 获取 Cookie
 
-- 安装 [Chrome](https://chrome.google.com/webstore/detail/cookie-editor/hlkenndednhfkekhgcdicdfddnkalmdm) 或 [Firefox](https://addons.mozilla.org/en-US/firefox/addon/cookie-editor/) 的 cookie editor 扩展
+- 安装 [Chrome](https://chrome.google.com/webstore/detail/cookie-editor/hlkenndednhfkekhgcdicdfddnkalmdm) 或 [Firefox](https://addons.mozilla.org/en-US/firefox/addon/cookie-editor/) 的 Cookie-Editor 扩展
 - 打开 [掘金](https://juejin.cn)
-- 打开扩展程序
+- 点击 Cookie-Editor 扩展程序
 - 点击右下角的 "Export" -> "Export as JSON" (保存到剪贴板)
-- 把你剪贴板上的内容粘贴到 `cookies.json` 文件中
+- 把剪贴板上的内容粘贴到 `cookies.json` 文件中
 
 ### 执行脚本
 
